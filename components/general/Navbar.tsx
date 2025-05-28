@@ -15,6 +15,7 @@ export default async function Navbar() {
             <Link href="/">
                 <div className="flex items-center gap-2">
                     <Image src="/next.svg" alt="logo" width={32} height={32} />
+                    Next-Vocab
                 </div>
             </Link>
             <div className="flex items-center gap-2">

@@ -1,0 +1,109 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Authentication UI Guidelines
+
+## Component Structure
+
+The authentication pages follow a consistent layout pattern using shadcn/ui components:
+
+- Card-based layout with proper spacing and responsive design
+- Clear visual hierarchy with title and description
+- Form fields with proper labels and validation
+- Social login options with clear separation
+- Footer with secondary actions (e.g., sign up link)
+
+## Key Components
+
+### Login Page
+The login page ([app/login/page.tsx](mdc:app/login/page.tsx)) demonstrates the standard authentication UI pattern:
+
+```tsx
+<Card className="w-full max-w-md">
+    <CardHeader>
+        <CardTitle>Welcome back</CardTitle>
+        <CardDescription>Sign in to your account</CardDescription>
+    </CardHeader>
+    <CardContent>
+        {/* Form fields */}
+    </CardContent>
+    <CardFooter>
+        {/* Secondary actions */}
+    </CardFooter>
+</Card>
+```
+
+## UI Components
+
+We use the following shadcn/ui components for authentication:
+
+- `Card` - Main container for auth forms
+- `Input` - Form input fields
+- `Button` - Primary and outline variants for actions
+- `CardHeader/CardContent/CardFooter` - Layout structure
+
+## Styling Guidelines
+
+1. **Spacing**
+   - Use `space-y-4` for vertical spacing between form elements
+   - Use `space-y-2` for label + input pairs
+   - Maintain consistent padding with `px-4 py-12`
+
+2. **Typography**
+   - Title: `text-2xl font-bold`
+   - Description: Default text with muted color
+   - Labels: `text-sm font-medium`
+
+3. **Layout**
+   - Center content with `flex min-h-screen items-center justify-center`
+   - Card width: `w-full max-w-md`
+   - Responsive padding: `px-4 sm:px-6 lg:px-8`
+
+4. **Colors**
+   - Background: `bg-gray-50`
+   - Text: Default text colors with `text-muted-foreground` for secondary text
+   - Links: `text-primary` with hover underline
+
+## Form Structure
+
+1. **Input Fields**
+   - Always include proper labels
+   - Use appropriate input types (email, password)
+   - Add required attribute where necessary
+   - Include helpful placeholders
+
+2. **Buttons**
+   - Primary action: Default button variant
+   - Secondary action: Outline variant
+   - Social login: Include icon + text
+   - Full width: `w-full` class
+
+3. **Dividers**
+   - Use relative positioning for divider lines
+   - Include "Or continue with" text
+   - Maintain proper spacing above and below
+
+## Best Practices
+
+1. **Accessibility**
+   - Use semantic HTML elements
+   - Include proper ARIA labels
+   - Maintain sufficient color contrast
+   - Ensure keyboard navigation works
+
+2. **Responsive Design**
+   - Test on mobile and desktop
+   - Use responsive padding and margins
+   - Ensure touch targets are large enough
+
+3. **Error Handling**
+   - Show clear error messages
+   - Highlight invalid fields
+   - Provide helpful feedback
+
+4. **Loading States**
+   - Disable buttons during submission
+   - Show loading indicators
+   - Prevent double submission

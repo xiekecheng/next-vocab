@@ -97,6 +97,9 @@ model UserWord {
   word      Word     @relation(fields: [wordId], references: [id])
   wordId    String
   status    LearningStatus @default(NEW)
+  note      String?        // 用户笔记
+  tags      String[]       // 用户标签
+  customMeaning String?    // 自定义释义
   updatedAt DateTime       @updatedAt
   createdAt DateTime       @default(now())
 

@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import { WordList } from './words/word-list'
 import { SearchBar } from './words/search-bar'
 import { FilterPanel } from './words/filter-panel'
-import { prisma } from '@/utils/prisma'
+import { prisma } from '@/lib/prisma'
 import { Prisma } from '@prisma/client'
 
 export default async function WordsPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {

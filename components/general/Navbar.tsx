@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import UserDrawdown from "./UserDrawdown";
 import Image from "next/image";
-import { auth } from "@/utils/auth";
+import { auth } from "@/lib/auth";
 import { Button } from "../ui/button";
 
 export default async function Navbar() {

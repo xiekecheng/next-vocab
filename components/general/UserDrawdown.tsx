@@ -6,7 +6,7 @@ import { User } from 'next-auth'
 import Image from 'next/image'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import Link from 'next/link'
-import { signOut } from '@/utils/auth'
+import { signOut } from '@/lib/auth'
 
 export default function UserDrawdown({ user }: { user: User }) {
     return (

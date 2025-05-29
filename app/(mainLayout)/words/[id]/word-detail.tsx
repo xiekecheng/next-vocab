@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Word, UserWord, LearningStatus } from "@prisma/client";
 import { updateWordStatus } from "@/lib/actions";
+import { Volume2 } from "lucide-react";
 
 interface WordDetailProps {
   word: Word;
@@ -29,6 +30,17 @@ export default function WordDetail({ word, userWord, prevWord, nextWord }: WordD
   const handleStatusChange = async (status: LearningStatus) => {
     await updateWordStatus(word.id, status);
     router.refresh();
+  };
+
+  const speakWord = (text: string) => {
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      // 设置语音参数
+      utterance.lang = 'en-US'; // 英语
+      utterance.rate = 0.8; // 语速稍慢
+      utterance.pitch = 1; // 音调
+      window.speechSynthesis.speak(utterance);
+    }
   };
 
   const handleAddTag = () => {
@@ -66,8 +78,15 @@ export default function WordDetail({ word, userWord, prevWord, nextWord }: WordD
         {/* 单词卡片 */}
         <Card className="p-6">
           <div className="flex items-center justify-between mb-4">
-            <div>
+            <div className="flex items-center gap-2">
               <h1 className="text-3xl font-bold">{word.text}</h1>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => speakWord(word.text)}
+              >
+                <Volume2 className="h-5 w-5" />
+              </Button>
               {word.phonetic && (
                 <p className="text-muted-foreground">{word.phonetic}</p>
               )}

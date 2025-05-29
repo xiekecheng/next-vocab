@@ -5,6 +5,7 @@ import { Word, LearningStatus } from '@prisma/client'
 import Link from 'next/link'
 import { updateWordStatus } from '@/lib/actions'
 import { useRouter } from 'next/navigation'
+import { Volume2 } from 'lucide-react'
 
 interface WordCardProps {
   word: Word & {
@@ -20,9 +21,30 @@ export function WordCard({ word }: WordCardProps) {
     router.refresh()
   }
 
+  const speakWord = (text: string) => {
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(text)
+      // 设置语音参数
+      utterance.lang = 'en-US' // 英语
+      utterance.rate = 0.8 // 语速稍慢
+      utterance.pitch = 1 // 音调
+      window.speechSynthesis.speak(utterance)
+    }
+  }
+
   return (
     <div className="border rounded p-4 flex flex-col gap-2 bg-white shadow-sm relative">
       <div className="absolute top-2 right-2 flex gap-1">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={(e) => {
+            e.preventDefault()
+            speakWord(word.text)
+          }}
+        >
+          <Volume2 className="h-4 w-4" />
+        </Button>
         <Button
           variant={word.status === "LEARNED" ? "default" : "outline"}
           size="sm"

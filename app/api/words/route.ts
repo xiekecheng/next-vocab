@@ -2,7 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/utils/prisma'
 
 export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url)
+  console.log('req', req)
+  const searchParams = req.nextUrl.searchParams
+  console.log('searchParams', searchParams)
   const page = Number(searchParams.get('page') || 1)
   const pageSize = Number(searchParams.get('pageSize') || 20)
   const q = searchParams.get('q') || ''

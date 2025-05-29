@@ -1,20 +1,8 @@
-'use client'
-import { useEffect, useState } from 'react'
-import { getWords } from './data-access'
+
 import { WordCard } from './word-card'
+import { WordWithUserStatus } from '@/lib/actions'
 
-interface Word {
-  id: string
-  text: string
-  phonetic: string | null
-  meaning: string
-  examples: string[]
-  frequency: number
-  createdAt: Date
-  updatedAt: Date
-}
-
-export function WordList({ items, total }: { items: Word[], total: number }) {
+export function WordList({ items, total }: { items: WordWithUserStatus[], total: number }) {
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

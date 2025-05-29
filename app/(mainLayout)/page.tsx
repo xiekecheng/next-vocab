@@ -4,28 +4,36 @@ import { SearchBar } from './words/search-bar'
 import { FilterPanel } from './words/filter-panel'
 import { prisma } from '@/lib/prisma'
 import { Prisma } from '@prisma/client'
+import { getPaginatedWordsWithStatus } from '@/lib/actions'
+import { auth } from '@/lib/auth'
 
 export default async function WordsPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
   const { page = '1', pageSize = '20', q = '', freqMin = '0', freqMax = '999999' } = await searchParams
   const searchQuery = Array.isArray(q) ? q[0] : q
 
-  const where: Prisma.WordWhereInput = {
-    frequency: { gte: Number(freqMin), lte: Number(freqMax) },
-    ...(searchQuery && { OR: [
-      { text: { contains: searchQuery, mode: Prisma.QueryMode.insensitive } },
-      { meaning: { contains: searchQuery, mode: Prisma.QueryMode.insensitive } }
-    ]}),
-  }
+  const session = await auth()
+  const userId = session?.user?.id
+  const { items, total } = await getPaginatedWordsWithStatus(Number(page), Number(pageSize), userId, searchQuery, Number(freqMin), Number(freqMax))
 
-  const [items, total] = await Promise.all([
-    prisma.word.findMany({
-      where,
-      orderBy: { frequency: 'desc' },
-      skip: (Number(page) - 1) * Number(pageSize),
-      take: Number(pageSize),
-    }),
-    prisma.word.count({ where }),
-  ])
+
+
+  // const where: Prisma.WordWhereInput = {
+  //   frequency: { gte: Number(freqMin), lte: Number(freqMax) },
+  //   ...(searchQuery && { OR: [
+  //     { text: { contains: searchQuery, mode: Prisma.QueryMode.insensitive } },
+  //     { meaning: { contains: searchQuery, mode: Prisma.QueryMode.insensitive } }
+  //   ]}),
+  // }
+
+  // const [items, total] = await Promise.all([
+  //   prisma.word.findMany({
+  //     where,
+  //     orderBy: { frequency: 'desc' },
+  //     skip: (Number(page) - 1) * Number(pageSize),
+  //     take: Number(pageSize),
+  //   }),
+  //   prisma.word.count({ where }),
+  // ])
 
   return (
     <div className="max-w-4xl mx-auto py-8 px-2">

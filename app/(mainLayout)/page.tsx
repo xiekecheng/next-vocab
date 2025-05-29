@@ -7,7 +7,9 @@ async function getWords() {
 }
 
 export default async function Home() {
-  const words = await getWords()
-  console.log(words)
+  // const words = await getWords()
+  // const words = await prisma.word.findMany()
+  // return words
+  // console.log(words)
   return <div>Home</div>;
 }

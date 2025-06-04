@@ -4,20 +4,14 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { WordCard } from "../words/word-card";
 import { completeWord } from "./actions";
 import { useSession } from "next-auth/react";
-import { auth } from "@/lib/auth";
 
-interface Word {
-  id: string;
-  text: string;
-  meaning: string;
-  status: string;
-}
+
+import { UserWord } from "@prisma/client";
 
 interface PracticeModeProps {
-  words: Word[];
+  words: UserWord[];
   planId: string;
 }
 
@@ -32,8 +26,9 @@ export default function PracticeMode({ words, planId }: PracticeModeProps) {
   const currentWord = words[currentWordIndex];
 
   const handleNext = async () => {
+
     if (session?.user?.id && currentWord) {
-      await completeWord(currentWord.id, session.user.id, planId);
+      await completeWord(currentWord.wordId, session.user.id, planId);
     }
     
     if (currentWordIndex < words.length - 1) {
@@ -68,9 +63,9 @@ export default function PracticeMode({ words, planId }: PracticeModeProps) {
           <TabsContent value="recognition" className="space-y-4">
             <div className="min-h-[200px] flex items-center justify-center">
               <div className="text-center space-y-4">
-                <h3 className="text-3xl font-bold">{currentWord?.text}</h3>
+                <h3 className="text-3xl font-bold">{currentWord?.word.text}</h3>
                 {showMeaning ? (
-                  <p className="text-xl">{currentWord?.meaning}</p>
+                  <p className="text-xl">{currentWord?.word.meaning}</p>
                 ) : (
                   <Button onClick={() => setShowMeaning(true)}>
                     显示释义
@@ -83,9 +78,9 @@ export default function PracticeMode({ words, planId }: PracticeModeProps) {
           <TabsContent value="recall" className="space-y-4">
             <div className="min-h-[200px] flex items-center justify-center">
               <div className="text-center space-y-4">
-                <h3 className="text-3xl font-bold">{currentWord?.meaning}</h3>
+                <h3 className="text-3xl font-bold">{currentWord?.word.meaning}</h3>
                 {showMeaning ? (
-                  <p className="text-xl">{currentWord?.text}</p>
+                  <p className="text-xl">{currentWord?.word.text}</p>
                 ) : (
                   <Button onClick={() => setShowMeaning(true)}>
                     显示单词

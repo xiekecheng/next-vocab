@@ -18,6 +18,7 @@ model User {
   // Optional for WebAuthn support
   Authenticator Authenticator[]
   userWords     UserWord[]
+  learningPlan  LearningPlan?
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -100,6 +101,8 @@ model UserWord {
   note      String?        // 用户笔记
   tags      String[]       // 用户标签
   customMeaning String?    // 自定义释义
+  completedIn LearningPlan? @relation("CompletedWords", fields: [completedInId], references: [id])
+  completedInId String?
   updatedAt DateTime       @updatedAt
   createdAt DateTime       @default(now())
 
@@ -110,4 +113,16 @@ enum LearningStatus {
   NEW       // 未学
   LEARNED   // 已背
   FAMILIAR  // 熟悉
+}
+
+model LearningPlan {
+  id            String   @id @default(uuid())
+  user          User     @relation(fields: [userId], references: [id])
+  userId        String   @unique
+  dailyGoal     Int      @default(20)  // 每日目标单词数
+  startDate     DateTime @default(now())
+  lastResetDate DateTime @default(now())
+  completedWords UserWord[] @relation("CompletedWords")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }

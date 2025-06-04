@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { LearningStatsChart } from "./learning-stats-chart"
 import { WordStatusChart } from "./word-status-chart"
+import { KeyMetrics } from "./key-metrics"
 import { Skeleton } from "@/components/ui/skeleton"
 
 export default function StatsPage() {
@@ -10,6 +11,10 @@ export default function StatsPage() {
     <div className="container mx-auto py-6 space-y-6">
       <h1 className="text-3xl font-bold">学习统计</h1>
       
+      <Suspense fallback={<Skeleton className="h-[140px] w-full" />}>
+        <KeyMetrics />
+      </Suspense>
+
       <div className="grid gap-6 md:grid-cols-2">
         <Card>
           <CardHeader>

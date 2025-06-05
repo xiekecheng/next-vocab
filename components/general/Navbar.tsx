@@ -23,7 +23,7 @@ export default async function Navbar() {
                         <span className="font-bold">NextVocab</span>
                     </Link>
                     <div className="flex items-center space-x-4">
-                        <Link href="/words" className="text-sm font-medium transition-colors hover:text-primary">
+                        <Link href="/" className="text-sm font-medium transition-colors hover:text-primary">
                             单词库
                         </Link>
                         <Link href="/plan" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">

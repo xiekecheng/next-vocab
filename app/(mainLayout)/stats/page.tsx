@@ -4,12 +4,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { LearningStatsChart } from "./learning-stats-chart"
 import { WordStatusChart } from "./word-status-chart"
 import { KeyMetrics } from "./key-metrics"
+import { ExportButton } from "./export-button"
 import { Skeleton } from "@/components/ui/skeleton"
 
 export default function StatsPage() {
   return (
     <div className="container mx-auto py-6 space-y-6">
-      <h1 className="text-3xl font-bold">学习统计</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold">学习统计</h1>
+        <ExportButton />
+      </div>
       
       <Suspense fallback={<Skeleton className="h-[140px] w-full" />}>
         <KeyMetrics />

@@ -74,6 +74,22 @@ export function WordCard({ word }: WordCardProps) {
             <Badge variant="outline">{word.frequency}</Badge>
           </div>
           <div className="text-sm text-gray-700">{word.meaning}</div>
+          
+          {/* 添加例句展示区域 */}
+          {word.examples && word.examples.length > 0 && (
+            <div className="mt-2 space-y-2">
+              <div className="text-sm font-medium text-gray-500">例句：</div>
+              <div className="space-y-2">
+                {word.examples.map((example, index) => {
+                  return (
+                    <div key={index} className="text-sm">
+                       <p className="text-gray-800">{index + 1}. {example}</p>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          )}
         </div>
       </Link>
     </div>

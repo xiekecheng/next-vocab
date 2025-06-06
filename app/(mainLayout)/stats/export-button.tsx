@@ -35,7 +35,8 @@ export function ExportButton() {
 
       toast.success("导出成功")
     } catch (error) {
-      toast.error("导出失败，请稍后重试")
+      console.error("导出失败", error)
+      toast.error("导出失败，请稍后重试",)
     } finally {
       setIsExporting(false)
     }

@@ -4,6 +4,7 @@ import { SearchBar } from './words/search-bar'
 import { FilterPanel } from './words/filter-panel'
 import { getPaginatedWordsWithStatus } from '@/lib/actions'
 import { auth } from '@/lib/auth'
+import { Word } from '@prisma/client'
 
 export default async function WordsPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
   const { page = '1', pageSize = '20', q = '', freqMin = '0', freqMax = '999999' } = await searchParams
@@ -40,7 +41,7 @@ export default async function WordsPage({ searchParams }: { searchParams: Promis
         <FilterPanel />
       </div>
       <Suspense fallback={<div>加载中...</div>}>
-        <WordList items={items} total={total} />
+        <WordList items={items as unknown as Word[]} total={total} />
       </Suspense>
     </div>
   )

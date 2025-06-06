@@ -45,9 +45,9 @@ export function ProfileForm({ user }: ProfileFormProps) {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues: {
-      name: user.name || '',
-      email: user.email || '',
-      image: user.image || '',
+      name: user.name ?? '',
+      email: user.email ?? '',
+      image: user.image ?? '',
     },
   })
 
@@ -68,6 +68,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
 
       toast.success('个人信息更新成功')
     } catch (error) {
+      console.error('更新失败', error)
       toast.error('更新失败，请稍后重试')
     } finally {
       setIsLoading(false)

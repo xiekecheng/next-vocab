@@ -11,10 +11,10 @@ import fontkit from '@pdf-lib/fontkit'
 
 // 添加 json2csv 类型声明
 declare module "json2csv" {
-  export class Parser {
-    constructor(options?: any)
-    parse(data: any): string
-  }
+  // export class Parser {
+  //   constructor(options?: any)
+  //   parse(data: any): string
+  // }
 }
 
 // 定义类型

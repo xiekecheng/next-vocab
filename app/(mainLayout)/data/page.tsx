@@ -6,8 +6,8 @@ import { Input } from "@/components/ui/input"
 import * as XLSX from "xlsx"
 
 export default function DataImportPage() {
-  const [excelData, setExcelData] = useState<any[]>([])
-  const [file, setFile] = useState<File | null>(null)
+  const [excelData, setExcelData] = useState<{ [key: string]: string }[]>([])
+  // const [file, setFile] = useState<File | null>(null)
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<string | null>(null)
 
@@ -15,14 +15,14 @@ export default function DataImportPage() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0]
     if (!f) return
-    setFile(f)
+    // setFile(f)
     const reader = new FileReader()
     reader.onload = (evt) => {
       const data = evt.target?.result
       const workbook = XLSX.read(data, { type: "binary" })
       const sheet = workbook.Sheets[workbook.SheetNames[0]]
       const json = XLSX.utils.sheet_to_json(sheet)
-      setExcelData(json)
+      setExcelData(json as { [key: string]: string }[])
     }
     reader.readAsBinaryString(f)
   }

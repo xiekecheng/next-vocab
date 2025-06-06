@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: '数据格式错误' }, { status: 400 })
   }
   // 字段映射与校验
-  const validWords = words.map((w: any) => ({
+  const validWords = words.map((w: { [key: string]: string }) => ({
     text: w['单词'] || w['word'],
     phonetic: w['音标'] || w['phonetic'],
     meaning: w['释义'] || w['meaning'],

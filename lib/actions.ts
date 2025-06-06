@@ -165,7 +165,7 @@ export async function getPaginatedWordsWithStatus(
     }),
   };
 
-  let [words, total] = await Promise.all([
+  const [words, total] = await Promise.all([
     prisma.word.findMany({
       where,
       orderBy: { frequency: "desc" },

@@ -1,17 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { Prisma } from '@prisma/client'
 
 export async function GET(req: NextRequest) {
-  console.log('req', req)
   const searchParams = req.nextUrl.searchParams
-  console.log('searchParams', searchParams)
   const page = Number(searchParams.get('page') || 1)
   const pageSize = Number(searchParams.get('pageSize') || 20)
   const q = searchParams.get('q') || ''
   const freqMin = Number(searchParams.get('freqMin') || 0)
   const freqMax = Number(searchParams.get('freqMax') || 999999)
 
-  const where: any = {
+  const where: Prisma.WordWhereInput = {
     frequency: { gte: freqMin, lte: freqMax },
     ...(q && { OR: [
       { text: { contains: q, mode: 'insensitive' } },

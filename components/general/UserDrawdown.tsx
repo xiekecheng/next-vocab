@@ -1,9 +1,7 @@
 import React from 'react'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from '../ui/dropdown-menu'
-import { Button } from '../ui/button'
-import { UserIcon } from 'lucide-react'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, DropdownMenuShortcut } from '../ui/dropdown-menu'
+
 import { User } from 'next-auth'
-import Image from 'next/image'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import Link from 'next/link'
 import { signOut } from '@/lib/auth'
@@ -14,8 +12,8 @@ export default function UserDrawdown({ user }: { user: User }) {
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Avatar>
-                        <AvatarImage src={user?.image!} alt={user?.name!} />
-                        <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
+                        <AvatarImage src={user?.image || ''} alt={user?.name || ''} />
+                        <AvatarFallback>{user?.name?.charAt(0) || ''}</AvatarFallback>
                     </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56">

@@ -2,8 +2,6 @@ import { Suspense } from 'react'
 import { WordList } from './words/word-list'
 import { SearchBar } from './words/search-bar'
 import { FilterPanel } from './words/filter-panel'
-import { prisma } from '@/lib/prisma'
-import { Prisma } from '@prisma/client'
 import { getPaginatedWordsWithStatus } from '@/lib/actions'
 import { auth } from '@/lib/auth'
 

@@ -1,15 +1,33 @@
+'use client'
 
+import { Word } from '@prisma/client'
 import { WordCard } from './word-card'
-import { WordWithUserStatus } from '@/lib/actions'
+import { Pagination } from './pagination'
+import { useSearchParams } from 'next/navigation'
 
-export function WordList({ items, total }: { items: WordWithUserStatus[], total: number }) {
+interface WordListProps {
+  items: Word[]
+  total: number
+}
+
+export function WordList({ items, total }: WordListProps) {
+  const searchParams = useSearchParams()
+  const currentPage = Number(searchParams.get('page')) || 1
+  const pageSize = Number(searchParams.get('pageSize')) || 20
+
   return (
-    <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {items.map((word) => <WordCard key={word.id} word={word} />)}
+    <div className="space-y-4">
+      <div className="grid  gap-4">
+        {items.map((word) => (
+          <WordCard key={word.id} word={word} />
+        ))}
       </div>
-      {/* TODO: 分页/加载更多 */}
-      <div className="mt-4 text-sm text-gray-500">共 {total} 条单词</div>
+      
+      <Pagination
+        total={total}
+        pageSize={pageSize}
+        currentPage={currentPage}
+      />
     </div>
   )
 } 

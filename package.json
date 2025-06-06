@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.9.1",
+    "@hookform/resolvers": "^5.0.1",
     "@pdf-lib/fontkit": "^1.1.1",
     "@prisma/client": "^6.8.2",
     "@radix-ui/react-avatar": "^1.1.10",
@@ -31,10 +32,12 @@
     "pdf-lib": "^1.17.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.57.0",
     "recharts": "^2.15.3",
     "sonner": "^2.0.5",
     "tailwind-merge": "^3.3.0",
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+    "zod": "^3.25.54"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

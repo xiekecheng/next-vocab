@@ -120,8 +120,8 @@ pnpm prisma migrate deploy
 
 ## 🤝 联系我们
 
-- 项目维护者：[Your Name](https://github.com/yourusername)
-- 邮箱：your.email@example.com
+- 项目维护者：[xiekecheng](https://github.com/xiekecheng)
+- 邮箱：xkccoding@gmail.com
 
 ---
 
